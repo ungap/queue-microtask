@@ -1,0 +1,38 @@
+{
+  "name": "@ungap/queue-microtask",
+  "version": "0.0.0",
+  "description": "queueMicrotask for all envs",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "unpkg": "min.js",
+  "scripts": {
+    "build": "npm run cjs && npm run esm && npm run min && npm run size",
+    "cjs": "cat index.js | sed 's/var self.*/var self = {};/' > cjs/index.js && echo 'module.exports = self.queueMicrotask;' >> cjs/index.js",
+    "esm": "cat index.js | sed 's/var self.*/var self = {};/' > esm/index.js && echo 'export default self.queueMicrotask;' >> esm/index.js",
+    "min": "uglifyjs index.js --support-ie8 --comments=/^!/ -c -m -o min.js",
+    "size": "cat index.js | wc -c && cat min.js | wc -c && gzip -c9 min.js | wc -c && cat min.js | brotli | wc -c"
+  },
+  "keywords": [
+    "queueMicrotask",
+    "micro",
+    "task"
+  ],
+  "author": "Andrea Giammarchi",
+  "license": "ISC",
+  "devDependencies": {
+    "uglifyjs": "^2.4.11"
+  },
+  "type": "module",
+  "exports": {
+    "import": "./esm/index.js",
+    "default": "./cjs/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ungap/queue-microtask.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ungap/queue-microtask/issues"
+  },
+  "homepage": "https://github.com/ungap/queue-microtask#readme"
+}

@@ -1,0 +1,2 @@
+/*! (c) Andrea Giammarchi - ISC */
+var self=this||{};try{self.queueMicrotask=queueMicrotask}catch(e){try{e=Promise.resolve(),self.queueMicrotask=e.then.bind(e)}catch(e){self.queueMicrotask=function(e){setTimeout(e,0)}}}
